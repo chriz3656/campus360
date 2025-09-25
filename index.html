@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus360 - All-in-One College Companion</title>
-
+    
     <!-- PWA Essentials -->
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" href="/icon/icon-192x192.png">
@@ -29,19 +29,22 @@
             --success-color: #10b981;
             --warning-color: #f59e0b;
             --danger-color: #ef4444;
-            --bg-color: #f0f4f8; /* New light background */
-            --card-bg: #ffffff;
-            --text-color: #333333;
+            --light-bg: #f8fafc;
+            --dark-bg: #0f172a;
             --text-light: #ffffff;
+            --text-dark: #0f172a;
             --text-secondary: #64748b;
             --border-color: #e2e8f0;
+            --card-bg: #ffffff;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
             --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
             --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
-            --border-radius: 12px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
             --transition: all 0.3s ease;
-            --neon-glow: 0 0 15px rgba(74, 111, 165, 0.4); /* Added for neon effect */
             --timetable-color: #6366f1;
             --events-color: #8b5cf6;
             --canteen-color: #10b981;
@@ -49,12 +52,6 @@
             --store-color: #f59e0b;
             --students-color: #14b8a6;
             --break-color: #ff9800;
-            --lunch-color: #ff9800;
-            --class-color: #4caf50;
-            --lab-color: #2196f3;
-            --workshop-color: #9c27b0;
-            --sports-color: #00bcd4;
-            --current-class: #4db6ac;
         }
         [data-theme="dark"] {
             --primary-color: #38bdf8;
@@ -62,12 +59,13 @@
             --success-color: #34d399;
             --warning-color: #fbbf24;
             --danger-color: #f87171;
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f1f5f9;
-            --text-light: #f8fafc;
+            --light-bg: #0f172a;
+            --dark-bg: #020617;
+            --text-light: #f1f5f9;
+            --text-dark: #f8fafc;
             --text-secondary: #94a3b8;
             --border-color: #334155;
+            --card-bg: #1e293b;
             --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
             --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
@@ -79,12 +77,13 @@
             --success-color: #34d399;
             --warning-color: #fbbf24;
             --danger-color: #f87171;
-            --bg-color: #0c4a6e;
-            --card-bg: #0369a1;
-            --text-color: #e0f2fe;
+            --light-bg: #4d9ece;
+            --dark-bg: #0369a1;
             --text-light: #ffffff;
+            --text-dark: #000000;
             --text-secondary: #a5b4fc;
-            --border-color: #0891b2;
+            --border-color: #7dd3fc;
+            --card-bg: #496ccf;
         }
 
         * {
@@ -95,14 +94,13 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background: linear-gradient(135deg, var(--bg-color) 0%, var(--card-bg) 100%);
+            color: var(--text-dark);
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--dark-bg) 100%);
             transition: var(--transition);
+            min-height: 100vh;
             padding: 20px;
             position: relative;
-            min-height: 100vh;
             padding-bottom: 140px; /* Space for footer */
-            overflow-x: hidden; /* Prevent horizontal scroll */
         }
         .container {
             max-width: 1400px;
@@ -115,62 +113,42 @@
         }
 
         /* --- Header / Navbar --- */
-        header {
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
-            animation: slideInDown 0.8s ease-out;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--text-dark);
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
         }
-        @keyframes slideInDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .college-info {
-            max-width: 600px;
-            perspective: 1000px; /* For 3D effect */
-        }
-        .college-name {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+        .nav-brand {
+            font-size: 1.5rem;
             font-weight: 700;
-            text-shadow: var(--neon-glow); /* Neon glow effect */
-            transform-style: preserve-3d; /* Preserve 3D for child elements */
-            transition: transform 0.3s; /* Smooth transition for hover effect */
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .college-name:hover {
-            transform: translateZ(20px); /* Lift effect on hover */
-        }
-        .dept-info {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--secondary-color);
-            font-size: 1.1rem;
-        }
-        .batch-info {
-            font-size: 0.9em;
-            opacity: 0.8;
-            margin-bottom: 10px;
-            background: rgba(0,0,0,0.05);
-            padding: 8px 12px;
-            border-radius: var(--border-radius);
-            backdrop-filter: blur(5px); /* Glassmorphism effect */
-        }
-
         .nav-links {
             display: flex;
             gap: 0.5rem;
-            flex-wrap: wrap; /* For smaller screens */
+            flex-wrap: wrap;
             justify-content: center;
         }
         .nav-links a {
-            color: var(--text-color);
+            color: var(--text-dark);
             text-decoration: none;
             padding: 0.75rem 1.5rem;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             transition: var(--transition);
             position: relative;
             font-weight: 500;
@@ -206,10 +184,10 @@
         }
         #theme-toggle {
             background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
-            color: var(--text-color);
+            color: var(--text-dark);
             border: 1px solid var(--border-color);
             padding: 0.75rem 1rem;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             cursor: pointer;
             transition: var(--transition);
         }
@@ -217,70 +195,9 @@
             background-color: rgba(0,0,0,0.1);
         }
 
-        /* --- Controls --- */
-        .controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        .search-container {
-            position: relative;
-            flex-grow: 1;
-            min-width: 200px;
-            transform: translateZ(0); /* Ensure search container is on top */
-        }
-        #search {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 30px;
-            border: 2px solid transparent;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-        }
-        #search:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: var(--shadow-md);
-        }
-        button {
-            padding: 10px 20px;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: var(--text-light);
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-            font-weight: 500;
-            position: relative;
-            overflow: hidden;
-        }
-        button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.5s;
-        }
-        button:hover::after {
-            transform: translateX(100%);
-        }
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
-
         /* --- Main Content & Pages --- */
         .main-content {
-            display: none; /* Hidden by default */
+            display: none;
         }
         .main-content.active {
             display: block;
@@ -288,7 +205,7 @@
         }
         .page-container {
             background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             padding: 2rem;
             box-shadow: var(--shadow-lg);
             border: 1px solid var(--border-color);
@@ -306,7 +223,7 @@
             grid-template-columns: 100px repeat(6, 1fr);
             gap: 1px;
             background-color: var(--border-color);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             margin-bottom: 2rem;
         }
@@ -349,51 +266,16 @@
             box-shadow: var(--shadow-lg);
         }
         .time-slot.current {
-            background: linear-gradient(135deg, var(--current-class), #a7f3d0);
+            background: linear-gradient(135deg, var(--success-color), #a7f3d0);
             border: 2px solid var(--success-color);
             animation: pulse 2s infinite;
-            position: relative;
-        }
-        .time-slot.current::after {
-            content: "NOW";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            animation: bounce 1s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
         .time-slot.break, .time-slot.lunch {
-            background: linear-gradient(135deg, var(--lunch-color), #ffd54f);
-        }
-        .time-slot.lecture {
-            background: linear-gradient(135deg, var(--class-color), #a5d6a7);
-        }
-        .time-slot.lab {
-            background: linear-gradient(135deg, var(--lab-color), #90caf9);
-        }
-        .time-slot.workshop {
-            background: linear-gradient(135deg, var(--workshop-color), #ce93d8);
-        }
-        .time-slot.sports {
-            background: linear-gradient(135deg, var(--sports-color), #80cbc4);
+            background: linear-gradient(135deg, var(--break-color), #ffd54f);
         }
         .time-slot .subject {
             font-weight: 600;
-            color: var(--text-color);
+            color: var(--text-dark);
             margin-bottom: 0.25rem;
         }
         .time-slot .faculty {
@@ -404,14 +286,6 @@
         .time-slot .room {
             font-size: 0.875rem;
             color: var(--text-secondary);
-        }
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 30px;
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
         }
 
         /* --- Events Specific Styles --- */
@@ -426,9 +300,18 @@
         .filters input {
             padding: 0.75rem;
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             background-color: var(--card-bg);
-            color: var(--text-color);
+            color: var(--text-dark);
+        }
+        .filters button {
+            background: linear-gradient(45deg, var(--events-color), var(--primary-color));
+            color: var(--text-light);
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition);
         }
         .events-list {
             display: grid;
@@ -437,7 +320,7 @@
         .event-card {
             background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             padding: 1.5rem;
             transition: var(--transition);
             position: relative;
@@ -459,7 +342,7 @@
         .event-title {
             font-size: 1.25rem;
             font-weight: 600;
-            color: var(--text-color);
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
         .event-date,
@@ -471,7 +354,7 @@
             background: linear-gradient(45deg, var(--events-color), var(--primary-color));
             color: var(--text-light);
             padding: 0.25rem 0.75rem;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-sm);
             font-size: 0.875rem;
             margin-right: 0.5rem;
         }
@@ -485,7 +368,7 @@
         .menu-item {
             background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             padding: 1.5rem;
             display: flex;
             justify-content: space-between;
@@ -502,7 +385,7 @@
         }
         .menu-item-name {
             font-weight: 600;
-            color: var(--text-color);
+            color: var(--text-dark);
         }
         .menu-item-price {
             color: var(--success-color);
@@ -517,7 +400,7 @@
         #map {
             height: 600px;
             width: 100%;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
         }
 
@@ -530,7 +413,7 @@
         .store-card {
             background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
             border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             padding: 1.5rem;
             transition: var(--transition);
         }
@@ -541,7 +424,7 @@
         .store-name {
             font-size: 1.25rem;
             font-weight: 600;
-            color: var(--text-color);
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
         .store-type,
@@ -556,7 +439,7 @@
         .students-table table {
             width: 100%;
             border-collapse: collapse;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-md);
         }
@@ -576,10 +459,10 @@
             background-color: rgba(0,0,0,0.02);
         }
         .students-table tr:hover {
-            background-color: var(--primary-color);
+            background-color: var(--primary-light);
         }
         .students-table tbody {
-            color: var(--text-color);
+            color: var(--text-dark);
         }
 
         /* --- Modal Styles --- */
@@ -594,43 +477,126 @@
             background-color: rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
-            animation: fadeInModal 0.3s ease-out;
-        }
-        @keyframes fadeInModal {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         .modal-content {
             background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 500px;
-            width: 90%;
             margin: 15% auto;
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            width: 80%;
+            max-width: 500px;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            transform: scale(0.9);
+            box-shadow: var(--shadow-xl);
             animation: modalAppear 0.4s forwards;
-            color: var(--text-color);
-            border: 1px solid rgba(0,0,0,0.1);
+            color: var(--text-dark);
+            border: 1px solid var(--border-color);
         }
         @keyframes modalAppear {
-            to { transform: scale(1); }
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
-        .close-modal {
+        .close {
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.8rem;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-color);
+            color: var(--text-secondary);
             transition: var(--transition);
         }
-        .close-modal:hover {
+        .close:hover {
             color: var(--danger-color);
         }
 
-        /* --- Loading Screen Styles --- */
+        /* --- Floating Action Button (FAB) --- */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-xl);
+            transition: var(--transition);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fab:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* --- Offline Container --- */
+        .offline-container {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-dark);
+        }
+        .offline-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        .retry-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            margin-top: 20px;
+            transition: var(--transition);
+        }
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* --- PWA Install Prompt --- */
+        #installContainer {
+            position: fixed;
+            bottom: 1em;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
+            padding: 1.5em;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            z-index: 999;
+            display: none;
+            animation: slideUp 0.5s ease-out;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        @keyframes slideUp {
+            from { transform: translate(-50%, 100%); }
+            to { transform: translate(-50%, 0); }
+        }
+        #installContainer.show {
+            display: block;
+        }
+        #installButton, #dismissInstallButton {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            margin: 0 0.5em;
+        }
+        #dismissInstallButton {
+            background: linear-gradient(135deg, var(--text-secondary), #64748b);
+        }
+
+        /* --- Loading Screen --- */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -664,52 +630,6 @@
             font-weight: 500;
         }
 
-        /* --- PWA Install Prompt --- */
-        #installContainer {
-            position: fixed;
-            bottom: 1em;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
-            padding: 1.5em;
-            border-radius: 20px; /* More rounded */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
-            z-index: 999;
-            display: none; /* Hidden by default */
-            animation: slideUp 0.5s ease-out;
-            border: 1px solid rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        @keyframes slideUp {
-            from { transform: translate(-50%, 100%); }
-            to { transform: translate(-50%, 0); }
-        }
-        #installContainer.hidden {
-            display: none;
-        }
-        #installButton {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            padding: 0.8em 1.5em;
-            border-radius: 30px; /* Pill shape */
-            cursor: pointer;
-            font-weight: 500;
-            box-shadow: var(--shadow); /* Consistent shadow */
-            margin: 0 0.5em; /* Space between buttons */
-        }
-        #dismissInstallButton {
-            background: linear-gradient(135deg, var(--text-secondary), #64748b);
-            color: white;
-            border: none;
-            padding: 0.8em 1.5em;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            box-shadow: var(--shadow);
-            margin: 0 0.5em;
-        }
-
         /* --- Footer --- */
         .footer {
             position: absolute;
@@ -719,7 +639,7 @@
             padding: 20px;
             text-align: center;
             background: linear-gradient(135deg, var(--card-bg), rgba(255,255,255,0.9));
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-top: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -757,39 +677,85 @@
             transform: translateY(-5px) scale(1.1);
             background: var(--primary-color);
             color: white;
-            box-shadow: var(--neon-glow); /* Neon glow on hover */
         }
 
         /* --- Animations --- */
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
         /* --- Responsive Design --- */
         @media (max-width: 1024px) {
             .timetable-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: 1fr;
+            }
+            .timetable-header {
+                display: none;
+            }
+            .time-slot {
+                min-height: auto;
+                padding: 1rem;
             }
         }
         @media (max-width: 768px) {
-            .timetable-grid { display: none; }
-            .mobile-day-view { display: block; }
-            .day-tabs { justify-content: center; }
-            header { flex-direction: column; }
-            .college-info { text-align: center; }
-            .footer { position: relative; margin-top: 30px; }
-            .controls { flex-direction: column; align-items: stretch; }
-            .day-tabs { flex-wrap: wrap; justify-content: center; }
-            .nav-buttons { justify-content: center; }
-            .credit { flex-direction: column; gap: 0; }
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .nav-links {
+                justify-content: center;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            .nav-links a {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            .menu-item-price {
+                align-self: flex-end;
+            }
+            .filters {
+                flex-direction: column;
+            }
+            #map {
+                height: 400px;
+            }
+            .footer {
+                position: relative;
+                margin-top: 30px;
+            }
         }
         @media (max-width: 480px) {
-            .controls { flex-direction: column; align-items: stretch; }
-            .day-tabs { flex-wrap: wrap; justify-content: center; }
-            .nav-buttons { justify-content: center; }
-            .credit { flex-direction: column; gap: 0; }
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .day-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-buttons {
+                justify-content: center;
+            }
+            .credit {
+                flex-direction: column;
+                gap: 0;
+            }
         }
     </style>
 </head>
@@ -801,12 +767,8 @@
     </div>
 
     <div class="container">
-        <header>
-            <div class="college-info">
-                <div class="college-name">Campus360</div>
-                <div class="dept-info">Computer Science Department</div>
-                <div class="batch-info">Batch: 2025-2026 | Semester: S1 | Tutor: Adhi</div>
-            </div>
+        <header class="navbar">
+            <div class="nav-brand">Campus360</div>
             <div class="nav-links">
                 <a href="#index" class="nav-link active" data-page="index">Timetable</a>
                 <a href="#events" class="nav-link" data-page="events">Events</a>
@@ -820,26 +782,21 @@
             </div>
         </header>
 
-        <div class="controls">
-            <div class="search-container">
-                <input type="text" id="search" placeholder="Search courses, faculty...">
-            </div>
-            <button id="today-btn">Today</button>
-            <a href="./students.html" id="students-btn" title="View Student List">
-                <button><i class="fas fa-users"></i> View All Students</button>
-            </a>
-            <button id="share-btn" title="Share Timetable"><i class="fas fa-share-alt"></i> Share</button>
-            <button id="notify-btn" title="Enable Notifications"><i class="fas fa-bell"></i> Notify</button>
-        </div>
-
         <main class="main-content active" id="index">
             <div class="page-container">
                 <h1>📅 Timetable</h1>
                 <div class="timetable-view">
                     <div class="timetable-grid" id="timetable-grid">
-                        <!-- Headers will be added by JS -->
+                        <div class="timetable-header">Time</div>
+                        <div class="timetable-header">Monday</div>
+                        <div class="timetable-header">Tuesday</div>
+                        <div class="timetable-header">Wednesday</div>
+                        <div class="timetable-header">Thursday</div>
+                        <div class="timetable-header">Friday</div>
+                        <div class="timetable-header">Saturday</div>
                     </div>
                 </div>
+                <button class="btn-primary" onclick="showPage('students')">👥 View All Students</button>
             </div>
         </main>
 
@@ -919,7 +876,7 @@
     <!-- Modals -->
     <div id="classModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close">&times;</span>
             <h2 id="modal-title">Class Details</h2>
             <div id="modal-body"></div>
         </div>
@@ -932,15 +889,20 @@
         <button id="dismissInstallButton">Dismiss</button>
     </div>
 
+    <!-- FAB -->
+    <button class="fab">📅</button>
+
     <!-- Footer -->
     <div class="footer">
         <div class="credit">
             <span>Created by</span>
-            <span style="font-weight:bold;color:var(--primary-color)">chriz</span>
+            <span>Campus360 Team</span>
         </div>
         <div class="social-links">
             <a href="https://chriz3656.github.io" target="_blank" class="social-link" title="Website"><i class="fas fa-globe"></i></a>
-            <a href="https://instagram.com/chriz__3656" target="_blank" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://instagram.com/yeah.adhii" target="_blank" class="social-link" title="Instagram @yeah.adhii"><i class="fab fa-instagram"></i></a>
+            <a href="https://instagram.com/chriz__3656" target="_blank" class="social-link" title="Instagram @chriz__3656"><i class="fab fa-instagram"></i></a>
+            <a href="https://instagram.com/hfx3__" target="_blank" class="social-link" title="Instagram @hfx3__"><i class="fab fa-instagram"></i></a>
             <a href="https://discord.com/users/chriz__3656" target="_blank" class="social-link" title="Discord"><i class="fab fa-discord"></i></a>
         </div>
     </div>
@@ -949,16 +911,15 @@
     <script>
         // --- Data ---
         const timetableData = [
-            { day: "Monday", time: "9:00-10:00", subject: "Mathematics", faculty: "Dr. A", room: "101", type: "lecture" },
-            { day: "Monday", time: "10:00-11:00", subject: "Physics", faculty: "Dr. B", room: "102", type: "lecture" },
-            { day: "Monday", time: "11:00-12:00", subject: "Chemistry", faculty: "Dr. C", room: "103", type: "lecture" },
+            { day: "Monday", time: "9:00-10:00", subject: "Mathematics", faculty: "Dr. A", room: "101" },
+            { day: "Monday", time: "10:00-11:00", subject: "Physics", faculty: "Dr. B", room: "102" },
+            { day: "Monday", time: "11:00-12:00", subject: "Chemistry", faculty: "Dr. C", room: "103" },
             { day: "Monday", time: "12:00-1:00", subject: "Lunch", type: "break" },
-            { day: "Tuesday", time: "9:00-10:00", subject: "Computer Science", faculty: "Dr. D", room: "201", type: "lecture" },
-            { day: "Tuesday", time: "10:00-11:00", subject: "Data Structures", faculty: "Dr. E", room: "202", type: "lab" },
-            { day: "Wednesday", time: "9:00-10:00", subject: "Database Management", faculty: "Dr. F", room: "301", type: "lecture" },
-            { day: "Thursday", time: "10:00-11:00", subject: "Web Development", faculty: "Dr. G", room: "302", type: "workshop" },
-            { day: "Friday", time: "9:00-10:00", subject: "Software Engineering", faculty: "Dr. H", room: "401", type: "lecture" },
-            { day: "Saturday", time: "10:00-11:00", subject: "Sports", type: "sports" }
+            { day: "Tuesday", time: "9:00-10:00", subject: "Computer Science", faculty: "Dr. D", room: "201" },
+            { day: "Tuesday", time: "10:00-11:00", subject: "Data Structures", faculty: "Dr. E", room: "202" },
+            { day: "Wednesday", time: "9:00-10:00", subject: "Database Management", faculty: "Dr. F", room: "301" },
+            { day: "Thursday", time: "10:00-11:00", subject: "Web Development", faculty: "Dr. G", room: "302" },
+            { day: "Friday", time: "9:00-10:00", subject: "Software Engineering", faculty: "Dr. H", room: "401" }
         ];
         const eventsData = [
             { title: "Annual Tech Fest", date: "2025-09-25", department: "CSE", location: "Main Auditorium", description: "Annual technology festival with competitions and workshops" },
@@ -998,32 +959,21 @@
         ];
 
         // --- State ---
-        let currentDayIndex = new Date().getDay() - 1; // 0=Monday, 6=Sunday
-        if (currentDayIndex < 0) currentDayIndex = 6; // Handle Sunday
+        let currentDayIndex = new Date().getDay() - 1;
+        if (currentDayIndex < 0) currentDayIndex = 6;
         const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
         let deferredPrompt = null;
-        let highlightInterval = null; // For dynamic highlighting
-
-        // --- DOM Elements ---
-        const timetableGrid = document.getElementById('timetable-grid');
-        const searchInput = document.getElementById('search');
-        const todayBtn = document.getElementById('today-btn');
-        const shareBtn = document.getElementById('share-btn');
-        const notifyBtn = document.getElementById('notify-btn');
-        const loadingScreen = document.getElementById('loading-screen');
 
         // --- Functions ---
         function showPage(pageId) {
             document.querySelectorAll('.main-content').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('data-page') === pageId) link.classList.add('active');
             });
-
             switch(pageId) {
-                case 'index': renderTimetableGrid(); break;
+                case 'index': renderTimetable(); break;
                 case 'events': renderEvents(); setupFilters(); break;
                 case 'canteen': renderCanteen(); break;
                 case 'map': initMap(); break;
@@ -1037,9 +987,13 @@
             localStorage.setItem('theme', themeName);
             const themeToggle = document.getElementById('theme-toggle');
             if (themeToggle) {
-                if (themeName === 'light') themeToggle.textContent = '🌙';
-                else if (themeName === 'dark') themeToggle.textContent = '☀️';
-                else themeToggle.textContent = '🌊';
+                if (themeName === 'light') {
+                    themeToggle.textContent = '🌙';
+                } else if (themeName === 'dark') {
+                    themeToggle.textContent = '☀️';
+                } else {
+                    themeToggle.textContent = '🌊';
+                }
             }
         }
 
@@ -1049,7 +1003,9 @@
         }
 
         function updateOnlineStatus() {
-            if (!navigator.onLine) showPage('offline');
+            if (!navigator.onLine) {
+                showPage('offline');
+            }
         }
 
         function formatDate(dateString) {
@@ -1069,63 +1025,20 @@
             rows.forEach(row => tbody.appendChild(row));
         }
 
-        function highlightCurrentClass() {
-            // Remove 'current' class from all slots
-            document.querySelectorAll('.time-slot').forEach(slot => slot.classList.remove('current'));
-
-            const now = new Date();
-            const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' });
-            const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-            // Find the slot that matches the current day and time
-            timetableData.forEach(item => {
-                if (item.day === currentDay) {
-                    const [start, end] = item.time.split('-');
-                    const [startH, startM] = start.split(':').map(Number);
-                    const [endH, endM] = end.split(':').map(Number);
-                    const startTotalMins = startH * 60 + startM;
-                    const endTotalMins = endH * 60 + endM;
-
-                    if (currentMinutes >= startTotalMins && currentMinutes < endTotalMins) {
-                        // Find the corresponding time slot element
-                        const slots = document.querySelectorAll('.time-slot');
-                        const timeHeader = Array.from(document.querySelectorAll('.timetable-header')).find(h => h.textContent === item.time);
-                        if (timeHeader) {
-                            const timeIndex = Array.from(timeHeader.parentNode.children).indexOf(timeHeader);
-                            const slotIndex = timeIndex - 1 + (days.indexOf(item.day) * 6); // -1 for 'Time' header, + day offset
-                            if (slots[slotIndex]) {
-                                slots[slotIndex].classList.add('current');
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        function startHighlightInterval() {
-            if (highlightInterval) clearInterval(highlightInterval);
-            highlightInterval = setInterval(highlightCurrentClass, 60000); // Every minute
-            highlightCurrentClass(); // Run immediately
-        }
-
-        function renderTimetableGrid(filter = '') {
-            if (!timetableGrid) return;
-            timetableGrid.innerHTML = ''; // Clear existing content (except headers)
-
-            // Add headers
+        function renderTimetable() {
+            const grid = document.getElementById('timetable-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
             const headers = ['Time', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             headers.forEach(day => {
                 const header = document.createElement('div');
                 header.className = 'timetable-header';
                 header.textContent = day;
-                timetableGrid.appendChild(header);
+                grid.appendChild(header);
             });
 
             const slots = {};
             timetableData.forEach(item => {
-                if (filter && !item.subject.toLowerCase().includes(filter.toLowerCase()) && !item.faculty.toLowerCase().includes(filter.toLowerCase())) {
-                    return; // Skip if filter doesn't match
-                }
                 if (!slots[item.time]) slots[item.time] = {};
                 slots[item.time][item.day] = item;
             });
@@ -1134,29 +1047,37 @@
                 const timeHeader = document.createElement('div');
                 timeHeader.className = 'timetable-header';
                 timeHeader.textContent = time;
-                timetableGrid.appendChild(timeHeader);
+                grid.appendChild(timeHeader);
 
-                headers.slice(1).forEach(day => { // Skip 'Time' header
+                headers.slice(1).forEach(day => {
                     const cell = document.createElement('div');
                     cell.className = 'time-slot';
                     const item = slots[time][day];
                     if (item) {
-                        cell.classList.add(item.type || 'lecture'); // Add type class for styling
+                        if (item.type === 'break' || item.type === 'lunch') {
+                            cell.classList.add(item.type);
+                        }
                         cell.innerHTML = `<div class="subject">${item.subject}</div><div class="faculty">${item.faculty}</div><div class="room">Room: ${item.room}</div>`;
+                        const now = new Date();
+                        const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' });
+                        const [start, end] = time.split('-');
+                        const [startH, startM] = start.split(':').map(Number);
+                        const [endH, endM] = end.split(':').map(Number);
+                        const startT = new Date(now);
+                        startT.setHours(startH, startM, 0, 0);
+                        const endT = new Date(now);
+                        endT.setHours(endH, endM, 0, 0);
+
+                        if (day === currentDay && now >= startT && now <= endT) {
+                            cell.classList.add('current');
+                        }
                         cell.addEventListener('click', () => showClassDetails(item));
                     } else {
                         cell.innerHTML = '<div class="empty">No Class</div>';
                     }
-                    timetableGrid.appendChild(cell);
+                    grid.appendChild(cell);
                 });
             });
-
-            if (Object.keys(slots).length === 0) {
-                const noResults = document.createElement('div');
-                noResults.className = 'no-results';
-                noResults.textContent = 'No classes found matching your search.';
-                timetableGrid.appendChild(noResults);
-            }
         }
 
         function showClassDetails(item) {
@@ -1164,7 +1085,7 @@
             const title = document.getElementById('modal-title');
             const body = document.getElementById('modal-body');
             title.textContent = item.subject;
-            body.innerHTML = `<p><strong>Faculty:</strong> ${item.faculty}</p><p><strong>Time:</strong> ${item.time}</p><p><strong>Day:</strong> ${item.day}</p><p><strong>Room:</strong> ${item.room}</p><p><strong>Type:</strong> ${item.type}</p>`;
+            body.innerHTML = `<p><strong>Faculty:</strong> ${item.faculty}</p><p><strong>Time:</strong> ${item.time}</p><p><strong>Day:</strong> ${item.day}</p><p><strong>Room:</strong> ${item.room}</p>`;
             modal.style.display = 'block';
         }
 
@@ -1188,7 +1109,6 @@
             const deptFilter = document.getElementById('deptFilter');
             const dateFilter = document.getElementById('dateFilter');
             const clearBtn = document.getElementById('clearFilters');
-
             if (deptFilter) deptFilter.addEventListener('change', filterEvents);
             if (dateFilter) dateFilter.addEventListener('change', filterEvents);
             if (clearBtn) clearBtn.addEventListener('click', () => {
@@ -1266,8 +1186,11 @@
         }
 
         function checkOnline() {
-            if (navigator.onLine) showPage('index');
-            else alert('Still offline. Please check your connection.');
+            if (navigator.onLine) {
+                showPage('index');
+            } else {
+                alert('Still offline. Please check your connection.');
+            }
         }
 
         // --- Event Listeners ---
@@ -1275,29 +1198,11 @@
             loadTheme();
             updateOnlineStatus();
 
-            // Page Navigation
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    showPage(link.getAttribute('data-page'));
-                });
-            });
-
-            // Modal Close
             const modals = document.querySelectorAll('.modal');
-            const closeButtons = document.querySelectorAll('.close-modal');
-            closeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    modals.forEach(modal => modal.style.display = 'none');
-                });
-            });
-            window.addEventListener('click', e => {
-                modals.forEach(modal => {
-                    if (e.target === modal) modal.style.display = 'none';
-                });
-            });
+            const closeBtns = document.querySelectorAll('.close');
+            closeBtns.forEach(btn => btn.addEventListener('click', () => modals.forEach(m => m.style.display = 'none')));
+            window.addEventListener('click', e => modals.forEach(m => { if (e.target === m) m.style.display = 'none'; }));
 
-            // Theme Toggle
             const themeToggle = document.getElementById('theme-toggle');
             if (themeToggle) {
                 themeToggle.addEventListener('click', () => {
@@ -1307,91 +1212,24 @@
                 });
             }
 
-            // Search Functionality
-            if (searchInput) {
-                searchInput.addEventListener('input', () => {
-                    if (document.getElementById('index').classList.contains('active')) {
-                        renderTimetableGrid(searchInput.value);
-                    }
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage(link.getAttribute('data-page'));
                 });
-            }
+            });
 
-            // Today Button
-            if (todayBtn) {
-                todayBtn.addEventListener('click', () => {
-                    const today = new Date().getDay() - 1; // 0 = Monday
-                    if (today >= 0 && today <= 6) { // Monday to Sunday
-                        currentDayIndex = today;
-                        // For simplicity, just re-render the grid for the whole week
-                        renderTimetableGrid(searchInput.value || '');
-                        startHighlightInterval();
-                    }
-                });
-            }
-
-            // Share Button
-            if (shareBtn) {
-                shareBtn.addEventListener('click', async () => {
-                    if (navigator.share) {
-                        try {
-                            await navigator.share({
-                                title: 'Campus360 Timetable',
-                                text: 'Check out my college timetable on Campus360!',
-                                url: window.location.href,
-                            });
-                        } catch (err) {
-                            console.log('Error sharing:', err);
-                        }
-                    } else {
-                        // Fallback if Web Share API is not supported
-                        try {
-                            await navigator.clipboard.writeText(window.location.href);
-                            alert('Link copied to clipboard!');
-                        } catch (err) {
-                            console.error('Could not copy text: ', err);
-                        }
-                    }
-                });
-            }
-
-            // Notification Button
-            if (notifyBtn) {
-                notifyBtn.addEventListener('click', requestNotificationPermission);
-                function requestNotificationPermission() {
-                    if (!("Notification" in window)) {
-                        alert("This browser does not support desktop notification");
-                        notifyBtn.disabled = true;
-                        return;
-                    }
-                    if (Notification.permission === "granted") {
-                        alert("Notifications already enabled!");
-                        notifyBtn.disabled = true;
-                    } else if (Notification.permission !== "denied") {
-                        Notification.requestPermission().then(permission => {
-                            if (permission === "granted") {
-                                alert("Notifications enabled!");
-                                notifyBtn.disabled = true;
-                            }
-                        });
-                    }
-                }
-            }
-
-            // Initial Page Load
-            showPage('index');
-            startHighlightInterval(); // Start highlighting after initial render
-
-            // PWA Install Prompt Event Listener
+            // PWA Install Prompt
             window.addEventListener('beforeinstallprompt', (e) => {
                 console.log('BeforeInstallPrompt event fired.');
                 e.preventDefault();
                 deferredPrompt = e;
-
                 const installContainer = document.getElementById('installContainer');
-                if (installContainer) installContainer.classList.add('show');
+                if (installContainer) {
+                    installContainer.classList.add('show');
+                }
             });
 
-            // Install Button Click Handler
             const installButton = document.getElementById('installButton');
             if (installButton) {
                 installButton.addEventListener('click', async () => {
@@ -1400,47 +1238,58 @@
                         const { outcome } = await deferredPrompt.userChoice;
                         console.log(`User response to the install prompt: ${outcome}`);
                         if (outcome === 'accepted') {
-                            console.log('User accepted the install prompt');
                             const installContainer = document.getElementById('installContainer');
-                            if (installContainer) installContainer.classList.remove('show');
+                            if (installContainer) {
+                                installContainer.classList.remove('show');
+                            }
                         }
                         deferredPrompt = null;
                     }
                 });
             }
 
-            // Dismiss Install Button Handler
             const dismissInstallButton = document.getElementById('dismissInstallButton');
             if (dismissInstallButton) {
                 dismissInstallButton.addEventListener('click', () => {
                     console.log('Install prompt dismissed by user.');
                     const installContainer = document.getElementById('installContainer');
-                    if (installContainer) installContainer.classList.remove('show');
+                    if (installContainer) {
+                        installContainer.classList.remove('show');
+                    }
                 });
             }
 
-            // App Installed Event Listener
             window.addEventListener('appinstalled', () => {
                 console.log('PWA was installed successfully.');
                 const installContainer = document.getElementById('installContainer');
-                if (installContainer) installContainer.classList.remove('show');
+                if (installContainer) {
+                    installContainer.classList.remove('show');
+                }
             });
 
-            // Hide Loading Screen after a short delay to ensure rendering
+            // Hide loading screen after a short delay
             setTimeout(() => {
-                loadingScreen.style.opacity = '0';
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500); // Match the CSS transition duration
-            }, 500); // A small delay to ensure content is rendered before hiding
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500); // Match the CSS transition duration
+                }
+            }, 1000); // A small delay to ensure content is rendered before hiding
+
+            showPage('index');
         });
 
-        // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(registration => console.log('SW registered: ', registration))
-                    .catch(registrationError => console.log('SW registration failed: ', registrationError));
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
             });
         }
     </script>
