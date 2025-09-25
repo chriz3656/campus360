@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus360 - All-in-One College Companion</title>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/png" href="/icon/icon-192x192.png">
+    <link rel="apple-touch-icon" href="/icon/icon-192x192.png">
+    <meta name="theme-color" content="#0b6efd">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         :root {
-            /* Light Theme */
             --primary-color: #0b6efd;
             --primary-light: #e0e7ff;
             --secondary-color: #495057;
@@ -30,7 +35,6 @@
             --radius-md: 12px;
             --radius-lg: 16px;
             --radius-xl: 24px;
-            /* Module Colors */
             --timetable-color: #6366f1;
             --events-color: #8b5cf6;
             --canteen-color: #10b981;
@@ -41,10 +45,10 @@
         [data-theme="dark"] {
             --primary-color: #38bdf8;
             --primary-light: #0ea5e9;
-            --secondary-color: #cbd5e1; /* Updated for better contrast */
-            --success-color: #34d399; /* Updated for better contrast */
-            --warning-color: #fbbf24; /* Updated for better contrast */
-            --danger-color: #f87171; /* Updated for better contrast */
+            --secondary-color: #cbd5e1;
+            --success-color: #34d399;
+            --warning-color: #fbbf24;
+            --danger-color: #f87171;
             --light-bg: #0f172a;
             --dark-bg: #020617;
             --text-light: #f1f5f9;
@@ -59,17 +63,17 @@
         }
         [data-theme="ocean"] {
             --primary-color: #0ea5e9;
-            --secondary-color: #7dd3fc; /* Updated for better contrast */
-            --success-color: #34d399; /* Updated for better contrast */
-            --warning-color: #fbbf24; /* Updated for better contrast */
-            --danger-color: #f87171; /* Updated for better contrast */
+            --secondary-color: #7dd3fc;
+            --success-color: #34d399;
+            --warning-color: #fbbf24;
+            --danger-color: #f87171;
             --light-bg: #4d9ece;
             --dark-bg: #0369a1;
             --text-light: #ffffff;
             --text-dark: #000000;
-            --text-secondary: #a5b4fc; /* Updated for better contrast */
+            --text-secondary: #a5b4fc;
             --border-color: #7dd3fc;
-            --card-bg: #496ccf; /* Updated for better contrast */
+            --card-bg: #496ccf;
         }
         * {
             margin: 0;
@@ -209,7 +213,7 @@
             position: relative;
             box-shadow: var(--shadow-xl);
             animation: slideUp 0.3s ease;
-            color: var(--text-dark); /* Added explicit text color for modal content */
+            color: var(--text-dark);
         }
         .close {
             position: absolute;
@@ -223,7 +227,6 @@
         .close:hover {
             color: var(--danger-color);
         }
-        /* Timetable Styles */
         .timetable-container h1 {
             margin-bottom: 1.5rem;
             color: var(--timetable-color);
@@ -266,19 +269,18 @@
         }
         .timetable-cell .subject {
             font-weight: 600;
-            color: var(--text-dark); /* Fixed: Use theme text color */
+            color: var(--text-dark);
             margin-bottom: 0.25rem;
         }
         .timetable-cell .faculty {
             font-size: 0.875rem;
-            color: var(--text-secondary); /* Should be fine using secondary */
+            color: var(--text-secondary);
             margin-bottom: 0.25rem;
         }
         .timetable-cell .room {
             font-size: 0.875rem;
-            color: var(--text-secondary); /* Fixed: Use theme text color */
+            color: var(--text-secondary);
         }
-        /* Events Styles */
         .events-container h1 {
             margin-bottom: 1.5rem;
             color: var(--events-color);
@@ -336,12 +338,12 @@
         .event-title {
             font-size: 1.25rem;
             font-weight: 600;
-            color: var(--text-dark); /* Fixed: Use theme text color */
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
         .event-date,
         .event-location {
-            color: var(--text-secondary); /* Fixed: Use theme text color */
+            color: var(--text-secondary);
         }
         .event-dept {
             display: inline-block;
@@ -352,7 +354,6 @@
             font-size: 0.875rem;
             margin-right: 0.5rem;
         }
-        /* Canteen Styles */
         .canteen-container h1 {
             margin-bottom: 1.5rem;
             color: var(--canteen-color);
@@ -382,16 +383,15 @@
         }
         .menu-item-name {
             font-weight: 600;
-            color: var(--text-dark); /* Fixed: Use theme text color */
+            color: var(--text-dark);
         }
         .menu-item-price {
-            color: var(--success-color); /* This color is generally okay */
+            color: var(--success-color);
         }
         .menu-item-available,
         .menu-item-unavailable {
-            color: var(--text-secondary); /* Fixed: Use theme text color */
+            color: var(--text-secondary);
         }
-        /* Map Styles */
         .map-container h1 {
             margin-bottom: 1.5rem;
             color: var(--map-color);
@@ -403,7 +403,6 @@
             border-radius: var(--radius-lg);
             border: 1px solid var(--border-color);
         }
-        /* Store Styles */
         .store-container h1 {
             margin-bottom: 1.5rem;
             color: var(--store-color);
@@ -427,16 +426,15 @@
         .store-name {
             font-size: 1.25rem;
             font-weight: 600;
-            color: var(--text-dark); /* Fixed: Use theme text color */
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
         }
         .store-type,
         .store-hours,
         .store-rating,
         .store-location {
-            color: var(--text-secondary); /* Fixed: Use theme text color */
+            color: var(--text-secondary);
         }
-        /* Students Table */
         .students-table table {
             width: 100%;
             border-collapse: collapse;
@@ -457,15 +455,14 @@
             font-weight: 600;
         }
         .students-table tr:nth-child(even) {
-            background-color: rgba(0,0,0,0.02); /* This rule might need adjustment in dark themes */
+            background-color: rgba(0,0,0,0.02);
         }
         .students-table tr:hover {
             background-color: var(--primary-light);
         }
         .students-table tbody {
-            color: var(--text-dark); /* Ensure table body text uses theme color */
+            color: var(--text-dark);
         }
-        /* Floating Action Button */
         .fab {
             position: fixed;
             bottom: 2rem;
@@ -486,7 +483,6 @@
             transform: translateY(-4px) scale(1.1);
             box-shadow: var(--shadow-xl);
         }
-        /* Offline Page */
         .offline-container {
             text-align: center;
             padding: 50px 20px;
@@ -510,7 +506,6 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
-        /* Responsive */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -558,7 +553,6 @@
                 height: 400px;
             }
         }
-        /* Animations */
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
@@ -585,7 +579,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Glassmorphism effect */
         .glass {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -613,21 +606,15 @@
             </select>
         </div>
     </nav>
-    <!-- Timetable Page -->
     <main class="main-content" id="index">
         <div class="timetable-container">
             <h1>📅 Timetable</h1>
             <div class="timetable-view">
-                <div class="timetable-grid">
-                    <!-- Timetable will be populated by JS -->
-                </div>
+                <div class="timetable-grid"></div>
             </div>
-            <button class="btn-primary" onclick="showPage('students')">
-                👥 View All Students
-            </button>
+            <button class="btn-primary" onclick="showPage('students')">👥 View All Students</button>
         </div>
     </main>
-    <!-- Events Page -->
     <main class="main-content page" id="events">
         <div class="events-container">
             <h1>🎉 Events Hub</h1>
@@ -642,40 +629,30 @@
                 <input type="date" id="dateFilter">
                 <button id="clearFilters">Clear Filters</button>
             </div>
-            <div class="events-list">
-                <!-- Events will be populated by JS -->
-            </div>
+            <div class="events-list"></div>
         </div>
     </main>
-    <!-- Canteen Page -->
     <main class="main-content page" id="canteen">
         <div class="canteen-container">
             <h1>🍔 Canteen Menu</h1>
             <div class="menu-all">
                 <h2>Full Menu</h2>
-                <div class="menu-items">
-                    <!-- All menu items will be populated by JS -->
-                </div>
+                <div class="menu-items"></div>
             </div>
         </div>
     </main>
-    <!-- Map Page -->
     <main class="main-content page" id="map">
         <div class="map-container">
             <h1>🗺️ Campus Map</h1>
             <div id="map"></div>
         </div>
     </main>
-    <!-- Store Page -->
     <main class="main-content page" id="store">
         <div class="store-container">
             <h1>🏪 Store Directory</h1>
-            <div class="stores-list">
-                <!-- Stores will be populated by JS -->
-            </div>
+            <div class="stores-list"></div>
         </div>
     </main>
-    <!-- Students Page -->
     <main class="main-content page" id="students">
         <div class="students-container">
             <h1>👥 Students List</h1>
@@ -688,14 +665,11 @@
                             <th onclick="sortTable(2)">Department 🏢</th>
                         </tr>
                     </thead>
-                    <tbody id="studentsTableBody">
-                        <!-- Students will be populated by JS -->
-                    </tbody>
+                    <tbody id="studentsTableBody"></tbody>
                 </table>
             </div>
         </div>
     </main>
-    <!-- Offline Page -->
     <main class="main-content page" id="offline">
         <div class="offline-container">
             <div class="offline-icon">📶</div>
@@ -705,7 +679,6 @@
             <button class="retry-btn" onclick="checkOnline()">Retry Connection</button>
         </div>
     </main>
-    <!-- Class Detail Modal -->
     <div id="classModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -713,284 +686,75 @@
             <div id="modal-body"></div>
         </div>
     </div>
-    <!-- Floating Action Button -->
     <button class="fab">📅</button>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Data remains the same as original
         const timetableData = [
-            {
-                "day": "Monday",
-                "time": "9:00-10:00",
-                "subject": "Mathematics",
-                "faculty": "Dr. A",
-                "room": "101"
-            },
-            {
-                "day": "Monday",
-                "time": "10:00-11:00",
-                "subject": "Physics",
-                "faculty": "Dr. B",
-                "room": "102"
-            },
-            {
-                "day": "Monday",
-                "time": "11:00-12:00",
-                "subject": "Chemistry",
-                "faculty": "Dr. C",
-                "room": "103"
-            },
-            {
-                "day": "Tuesday",
-                "time": "9:00-10:00",
-                "subject": "Computer Science",
-                "faculty": "Dr. D",
-                "room": "201"
-            },
-            {
-                "day": "Tuesday",
-                "time": "10:00-11:00",
-                "subject": "Data Structures",
-                "faculty": "Dr. E",
-                "room": "202"
-            },
-            {
-                "day": "Wednesday",
-                "time": "9:00-10:00",
-                "subject": "Database Management",
-                "faculty": "Dr. F",
-                "room": "301"
-            },
-            {
-                "day": "Thursday",
-                "time": "10:00-11:00",
-                "subject": "Web Development",
-                "faculty": "Dr. G",
-                "room": "302"
-            },
-            {
-                "day": "Friday",
-                "time": "9:00-10:00",
-                "subject": "Software Engineering",
-                "faculty": "Dr. H",
-                "room": "401"
-            }
+            { day: "Monday", time: "9:00-10:00", subject: "Mathematics", faculty: "Dr. A", room: "101" },
+            { day: "Monday", time: "10:00-11:00", subject: "Physics", faculty: "Dr. B", room: "102" },
+            { day: "Monday", time: "11:00-12:00", subject: "Chemistry", faculty: "Dr. C", room: "103" },
+            { day: "Tuesday", time: "9:00-10:00", subject: "Computer Science", faculty: "Dr. D", room: "201" },
+            { day: "Tuesday", time: "10:00-11:00", subject: "Data Structures", faculty: "Dr. E", room: "202" },
+            { day: "Wednesday", time: "9:00-10:00", subject: "Database Management", faculty: "Dr. F", room: "301" },
+            { day: "Thursday", time: "10:00-11:00", subject: "Web Development", faculty: "Dr. G", room: "302" },
+            { day: "Friday", time: "9:00-10:00", subject: "Software Engineering", faculty: "Dr. H", room: "401" }
         ];
         const eventsData = [
-            {
-                "title": "Annual Tech Fest",
-                "date": "2025-09-25",
-                "department": "CSE",
-                "location": "Main Auditorium",
-                "description": "Annual technology festival with competitions and workshops"
-            },
-            {
-                "title": "Sports Day",
-                "date": "2025-10-15",
-                "department": "All",
-                "location": "Sports Ground",
-                "description": "Annual sports competition for all departments"
-            },
-            {
-                "title": "Career Guidance Workshop",
-                "date": "2025-10-05",
-                "department": "Placement",
-                "location": "Conference Hall",
-                "description": "Workshop on career planning and job preparation"
-            },
-            {
-                "title": "Hackathon",
-                "date": "2025-11-20",
-                "department": "CSE",
-                "location": "Computer Lab",
-                "description": "24-hour coding competition"
-            },
-            {
-                "title": "Cultural Fest",
-                "date": "2025-12-10",
-                "department": "All",
-                "location": "Main Stage",
-                "description": "Annual cultural festival with performances and competitions"
-            }
+            { title: "Annual Tech Fest", date: "2025-09-25", department: "CSE", location: "Main Auditorium", description: "Annual tech fest" },
+            { title: "Sports Day", date: "2025-10-15", department: "All", location: "Sports Ground", description: "Annual sports competition" },
+            { title: "Career Guidance Workshop", date: "2025-10-05", department: "Placement", location: "Conference Hall", description: "Career planning workshop" },
+            { title: "Hackathon", date: "2025-11-20", department: "CSE", location: "Computer Lab", description: "24-hour coding competition" },
+            { title: "Cultural Fest", date: "2025-12-10", department: "All", location: "Main Stage", description: "Annual cultural festival" }
         ];
         const canteenData = [
-            {
-                "item": "Pizza",
-                "price": 80,
-                "available": true,
-                "special": true
-            },
-            {
-                "item": "Burger",
-                "price": 50,
-                "available": true,
-                "special": false
-            },
-            {
-                "item": "Sandwich",
-                "price": 35,
-                "available": true,
-                "special": false
-            },
-            {
-                "item": "Pasta",
-                "price": 70,
-                "available": true,
-                "special": true
-            },
-            {
-                "item": "Coffee",
-                "price": 25,
-                "available": true,
-                "special": false
-            },
-            {
-                "item": "Tea",
-                "price": 15,
-                "available": true,
-                "special": false
-            },
-            {
-                "item": "Fries",
-                "price": 40,
-                "available": true,
-                "special": false
-            },
-            {
-                "item": "Cold Drink",
-                "price": 30,
-                "available": true,
-                "special": false
-            }
+            { item: "Pizza", price: 80, available: true, special: true },
+            { item: "Burger", price: 50, available: true, special: false },
+            { item: "Sandwich", price: 35, available: true, special: false },
+            { item: "Pasta", price: 70, available: true, special: true },
+            { item: "Coffee", price: 25, available: true, special: false },
+            { item: "Tea", price: 15, available: true, special: false },
+            { item: "Fries", price: 40, available: true, special: false },
+            { item: "Cold Drink", price: 30, available: true, special: false }
         ];
         const storeData = [
-            {
-                "name": "Book Store",
-                "type": "Books & Supplies",
-                "hours": "9:00 AM - 5:00 PM",
-                "rating": 4.5,
-                "location": "Ground Floor, Main Building"
-            },
-            {
-                "name": "Stationery Store",
-                "type": "Stationery & Office Supplies",
-                "hours": "8:30 AM - 6:00 PM",
-                "rating": 4.2,
-                "location": "First Floor, Library Building"
-            },
-            {
-                "name": "Cafeteria",
-                "type": "Food & Beverages",
-                "hours": "8:00 AM - 8:00 PM",
-                "rating": 4.7,
-                "location": "Ground Floor, Student Center"
-            },
-            {
-                "name": "Electronics Store",
-                "type": "Electronics & Accessories",
-                "hours": "10:00 AM - 7:00 PM",
-                "rating": 4.0,
-                "location": "Second Floor, Student Center"
-            },
-            {
-                "name": "Medical Store",
-                "type": "Pharmacy",
-                "hours": "9:00 AM - 6:00 PM",
-                "rating": 4.3,
-                "location": "Ground Floor, Health Center"
-            }
+            { name: "Book Store", type: "Books & Supplies", hours: "9:00 AM - 5:00 PM", rating: 4.5, location: "Ground Floor, Main Building" },
+            { name: "Stationery Store", type: "Stationery & Office Supplies", hours: "8:30 AM - 6:00 PM", rating: 4.2, location: "First Floor, Library Building" },
+            { name: "Cafeteria", type: "Food & Beverages", hours: "8:00 AM - 8:00 PM", rating: 4.7, location: "Ground Floor, Student Center" },
+            { name: "Electronics Store", type: "Electronics & Accessories", hours: "10:00 AM - 7:00 PM", rating: 4.0, location: "Second Floor, Student Center" },
+            { name: "Medical Store", type: "Pharmacy", hours: "9:00 AM - 6:00 PM", rating: 4.3, location: "Ground Floor, Health Center" }
         ];
         const studentsData = [
-            {
-                "name": "John Doe",
-                "roll": "CSE101",
-                "department": "Computer Science"
-            },
-            {
-                "name": "Jane Smith",
-                "roll": "CSE102",
-                "department": "Computer Science"
-            },
-            {
-                "name": "Mike Johnson",
-                "roll": "ECE101",
-                "department": "Electronics"
-            },
-            {
-                "name": "Sarah Wilson",
-                "roll": "ME101",
-                "department": "Mechanical"
-            },
-            {
-                "name": "David Brown",
-                "roll": "CE101",
-                "department": "Civil"
-            },
-            {
-                "name": "Emily Davis",
-                "roll": "CSE103",
-                "department": "Computer Science"
-            },
-            {
-                "name": "Robert Miller",
-                "roll": "ECE102",
-                "department": "Electronics"
-            },
-            {
-                "name": "Lisa Taylor",
-                "roll": "ME102",
-                "department": "Mechanical"
-            },
-            {
-                "name": "James Anderson",
-                "roll": "CE102",
-                "department": "Civil"
-            },
-            {
-                "name": "Patricia Thomas",
-                "roll": "CSE104",
-                "department": "Computer Science"
-            }
+            { name: "John Doe", roll: "CSE101", department: "Computer Science" },
+            { name: "Jane Smith", roll: "CSE102", department: "Computer Science" },
+            { name: "Mike Johnson", roll: "ECE101", department: "Electronics" },
+            { name: "Sarah Wilson", roll: "ME101", department: "Mechanical" },
+            { name: "David Brown", roll: "CE101", department: "Civil" },
+            { name: "Emily Davis", roll: "CSE103", department: "Computer Science" },
+            { name: "Robert Miller", roll: "ECE102", department: "Electronics" },
+            { name: "Lisa Taylor", roll: "ME102", department: "Mechanical" },
+            { name: "James Anderson", roll: "CE102", department: "Civil" },
+            { name: "Patricia Thomas", roll: "CSE104", department: "Computer Science" }
         ];
-        // Navigation and page management
         function showPage(pageId) {
-            document.querySelectorAll('.page, #index').forEach(page => {
-                page.classList.remove('active');
-            });
+            document.querySelectorAll('.page, #index').forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === `#${pageId}`) {
-                    link.classList.add('active');
-                }
+                if (link.getAttribute('href') === `#${pageId}`) link.classList.add('active');
             });
             switch(pageId) {
-                case 'index':
-                    renderTimetable();
-                    break;
-                case 'events':
-                    renderEvents();
-                    setupFilters();
-                    break;
-                case 'canteen':
-                    renderCanteen();
-                    break;
-                case 'map':
-                    initMap();
-                    break;
-                case 'store':
-                    renderStores();
-                    break;
-                case 'students':
-                    renderStudents();
-                    break;
+                case 'index': renderTimetable(); break;
+                case 'events': renderEvents(); setupFilters(); break;
+                case 'canteen': renderCanteen(); break;
+                case 'map': initMap(); break;
+                case 'store': renderStores(); break;
+                case 'students': renderStudents(); break;
             }
         }
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const pageId = link.getAttribute('href').substring(1);
-                showPage(pageId);
+                showPage(link.getAttribute('href').substring(1));
             });
         });
         function setTheme(themeName) {
@@ -1000,196 +764,133 @@
         function loadTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             setTheme(savedTheme);
-            const themeSelector = document.getElementById('themeSelector');
-            if (themeSelector) {
-                themeSelector.value = savedTheme;
-                themeSelector.addEventListener('change', (e) => {
-                    setTheme(e.target.value);
-                });
-            }
+            const selector = document.getElementById('themeSelector');
+            selector.value = savedTheme;
+            selector.addEventListener('change', e => setTheme(e.target.value));
         }
         function updateOnlineStatus() {
-            const online = navigator.onLine;
-            if (!online) {
-                showPage('offline');
-            }
+            if (!navigator.onLine) showPage('offline');
         }
         function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', {
-                weekday: 'short',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
+            return new Date(dateString).toLocaleDateString('en-US', {
+                weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
             });
         }
-        function sortTable(columnIndex) {
+        function sortTable(colIndex) {
             const table = document.querySelector('table');
             const tbody = table.querySelector('tbody');
             const rows = Array.from(tbody.querySelectorAll('tr'));
             rows.sort((a, b) => {
-                const aValue = a.cells[columnIndex].textContent.toLowerCase();
-                const bValue = b.cells[columnIndex].textContent.toLowerCase();
-                return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+                const aVal = a.cells[colIndex].textContent.toLowerCase();
+                const bVal = b.cells[colIndex].textContent.toLowerCase();
+                return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
             });
             rows.forEach(row => tbody.appendChild(row));
         }
-        let currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' });
         function renderTimetable() {
-            const timetableGrid = document.querySelector('.timetable-grid');
-            if (!timetableGrid) return;
-            timetableGrid.innerHTML = '';
+            const grid = document.querySelector('.timetable-grid');
+            if (!grid) return;
+            grid.innerHTML = '';
             const days = ['Time', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             days.forEach(day => {
                 const header = document.createElement('div');
                 header.className = 'timetable-header';
                 header.textContent = day;
-                timetableGrid.appendChild(header);
+                grid.appendChild(header);
             });
-            const timeSlots = {};
-            timetableData.forEach(classItem => {
-                if (!timeSlots[classItem.time]) {
-                    timeSlots[classItem.time] = {};
-                }
-                timeSlots[classItem.time][classItem.day] = classItem;
+            const slots = {};
+            timetableData.forEach(item => {
+                if (!slots[item.time]) slots[item.time] = {};
+                slots[item.time][item.day] = item;
             });
-            Object.keys(timeSlots).sort().forEach(time => {
+            Object.keys(slots).sort().forEach(time => {
                 const timeHeader = document.createElement('div');
                 timeHeader.className = 'timetable-header';
                 timeHeader.textContent = time;
-                timetableGrid.appendChild(timeHeader);
+                grid.appendChild(timeHeader);
                 days.slice(1).forEach(day => {
                     const cell = document.createElement('div');
                     cell.className = 'timetable-cell';
-                    cell.dataset.day = day;
-                    cell.dataset.time = time;
-                    const classItem = timeSlots[time][day];
-                    if (classItem) {
-                        cell.innerHTML = `
-                            <div class="subject">${classItem.subject}</div>
-                            <div class="faculty">${classItem.faculty}</div>
-                            <div class="room">Room: ${classItem.room}</div>
-                        `;
+                    const item = slots[time][day];
+                    if (item) {
+                        cell.innerHTML = `<div class="subject">${item.subject}</div><div class="faculty">${item.faculty}</div><div class="room">Room: ${item.room}</div>`;
                         const now = new Date();
-                        const currentDayName = now.toLocaleDateString('en-US', { weekday: 'long' });
+                        const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' });
                         const [start, end] = time.split('-');
-                        const [startHour, startMin] = start.split(':').map(Number);
-                        const [endHour, endMin] = end.split(':').map(Number);
-                        const startTime = new Date();
-                        startTime.setHours(startHour, startMin, 0, 0);
-                        const endTime = new Date();
-                        endTime.setHours(endHour, endMin, 0, 0);
-                        if (day === currentDayName && now >= startTime && now <= endTime) {
-                            cell.classList.add('current');
-                        }
-                        cell.addEventListener('click', () => showClassDetails(classItem));
+                        const [startH, startM] = start.split(':').map(Number);
+                        const [endH, endM] = end.split(':').map(Number);
+                        const startT = new Date(now.setHours(startH, startM, 0, 0));
+                        const endT = new Date(now.setHours(endH, endM, 0, 0));
+                        if (day === currentDay && now >= startT && now <= endT) cell.classList.add('current');
+                        cell.addEventListener('click', () => showClassDetails(item));
                     } else {
                         cell.innerHTML = '<div class="empty">No Class</div>';
                     }
-                    timetableGrid.appendChild(cell);
+                    grid.appendChild(cell);
                 });
             });
         }
-        function showClassDetails(classItem) {
+        function showClassDetails(item) {
             const modal = document.getElementById('classModal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalBody = document.getElementById('modal-body');
-            modalTitle.textContent = classItem.subject;
-            modalBody.innerHTML = `
-                <p><strong>Faculty:</strong> ${classItem.faculty}</p>
-                <p><strong>Time:</strong> ${classItem.time}</p>
-                <p><strong>Day:</strong> ${classItem.day}</p>
-                <p><strong>Room:</strong> ${classItem.room}</p>
-            `;
+            const title = document.getElementById('modal-title');
+            const body = document.getElementById('modal-body');
+            title.textContent = item.subject;
+            body.innerHTML = `<p><strong>Faculty:</strong> ${item.faculty}</p><p><strong>Time:</strong> ${item.time}</p><p><strong>Day:</strong> ${item.day}</p><p><strong>Room:</strong> ${item.room}</p>`;
             modal.style.display = 'block';
         }
         function renderEvents(events = eventsData) {
-            const eventsList = document.querySelector('.events-list');
-            if (!eventsList) return;
-            eventsList.innerHTML = '';
+            const list = document.querySelector('.events-list');
+            if (!list) return;
+            list.innerHTML = '';
             if (events.length === 0) {
-                eventsList.innerHTML = '<p>No events found.</p>';
+                list.innerHTML = '<p>No events found.</p>';
                 return;
             }
             events.forEach(event => {
-                const eventCard = document.createElement('div');
-                eventCard.className = 'event-card';
-                eventCard.innerHTML = `
-                    <div class="event-title">${event.title}</div>
-                    <div class="event-date">${formatDate(event.date)}</div>
-                    <div class="event-dept">${event.department}</div>
-                    <div class="event-location">${event.location}</div>
-                `;
-                eventsList.appendChild(eventCard);
+                const card = document.createElement('div');
+                card.className = 'event-card';
+                card.innerHTML = `<div class="event-title">${event.title}</div><div class="event-date">${formatDate(event.date)}</div><div class="event-dept">${event.department}</div><div class="event-location">${event.location}</div>`;
+                list.appendChild(card);
             });
         }
         function setupFilters() {
             const deptFilter = document.getElementById('deptFilter');
             const dateFilter = document.getElementById('dateFilter');
             const clearBtn = document.getElementById('clearFilters');
-            if (deptFilter) {
-                deptFilter.addEventListener('change', filterEvents);
-            }
-            if (dateFilter) {
-                dateFilter.addEventListener('change', filterEvents);
-            }
-            if (clearBtn) {
-                clearBtn.addEventListener('click', () => {
-                    deptFilter.value = 'all';
-                    dateFilter.value = '';
-                    renderEvents();
-                });
-            }
-        }
-        function filterEvents() {
-            const deptFilter = document.getElementById('deptFilter').value;
-            const dateFilter = document.getElementById('dateFilter').value;
-            let filteredEvents = [...eventsData];
-            if (deptFilter !== 'all') {
-                filteredEvents = filteredEvents.filter(event => 
-                    event.department === deptFilter
-                );
-            }
-            if (dateFilter) {
-                filteredEvents = filteredEvents.filter(event => 
-                    event.date === dateFilter
-                );
-            }
-            renderEvents(filteredEvents);
-        }
-        function renderCanteen() {
-            const menuItems = document.querySelector('.menu-items');
-            if (!menuItems) return;
-            menuItems.innerHTML = '';
-            canteenData.forEach(item => {
-                const menuItem = document.createElement('div');
-                menuItem.className = 'menu-item';
-                if (item.special) menuItem.classList.add('special');
-                menuItem.innerHTML = `
-                    <div>
-                        <div class="menu-item-name">${item.item}</div>
-                        <div class="menu-item-${item.available ? 'available' : 'unavailable'}">
-                            ${item.available ? 'Available ✅' : 'Not Available ❌'}
-                        </div>
-                    </div>
-                    <div class="menu-item-price">₹${item.price}</div>
-                `;
-                menuItems.appendChild(menuItem);
+            deptFilter.addEventListener('change', filterEvents);
+            dateFilter.addEventListener('change', filterEvents);
+            clearBtn.addEventListener('click', () => {
+                deptFilter.value = 'all';
+                dateFilter.value = '';
+                renderEvents();
             });
         }
-        let map;
-        let markers = [];
+        function filterEvents() {
+            const dept = document.getElementById('deptFilter').value;
+            const date = document.getElementById('dateFilter').value;
+            let filtered = [...eventsData];
+            if (dept !== 'all') filtered = filtered.filter(e => e.department === dept);
+            if (date) filtered = filtered.filter(e => e.date === date);
+            renderEvents(filtered);
+        }
+        function renderCanteen() {
+            const list = document.querySelector('.menu-items');
+            if (!list) return;
+            list.innerHTML = '';
+            canteenData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `menu-item ${item.special ? 'special' : ''}`;
+                card.innerHTML = `<div><div class="menu-item-name">${item.item}</div><div class="menu-item-${item.available ? 'available' : 'unavailable'}">${item.available ? 'Available ✅' : 'Not Available ❌'}</div></div><div class="menu-item-price">₹${item.price}</div>`;
+                list.appendChild(card);
+            });
+        }
+        let map, markers = [];
         function initMap() {
-            if (map) {
-                map.remove();
-            }
+            if (map) map.remove();
             map = L.map('map').setView([28.6139, 77.2090], 15);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
-            loadMapData();
-        }
-        function loadMapData() {
             const locations = [
                 { name: 'Main Building', lat: 28.6139, lng: 77.2090, type: 'building' },
                 { name: 'Library', lat: 28.6140, lng: 77.2091, type: 'library' },
@@ -1198,30 +899,21 @@
                 { name: 'Bus Stop', lat: 28.6137, lng: 77.2088, type: 'transport' },
                 { name: 'Book Store', lat: 28.6142, lng: 77.2093, type: 'store' }
             ];
-            locations.forEach(location => {
-                const marker = L.marker([location.lat, location.lng]).addTo(map);
-                marker.bindPopup(`
-                    <b>${location.name}</b><br>
-                    Type: ${location.type}
-                `);
+            locations.forEach(loc => {
+                const marker = L.marker([loc.lat, loc.lng]).addTo(map);
+                marker.bindPopup(`<b>${loc.name}</b><br>Type: ${loc.type}`);
                 markers.push(marker);
             });
         }
         function renderStores() {
-            const storesList = document.querySelector('.stores-list');
-            if (!storesList) return;
-            storesList.innerHTML = '';
+            const list = document.querySelector('.stores-list');
+            if (!list) return;
+            list.innerHTML = '';
             storeData.forEach(store => {
-                const storeCard = document.createElement('div');
-                storeCard.className = 'store-card';
-                storeCard.innerHTML = `
-                    <div class="store-name">${store.name}</div>
-                    <div class="store-type">${store.type}</div>
-                    <div class="store-hours">Hours: ${store.hours}</div>
-                    ${store.rating ? `<div class="store-rating">⭐ Rating: ${store.rating}/5</div>` : ''}
-                    ${store.location ? `<div class="store-location">📍 Location: ${store.location}</div>` : ''}
-                `;
-                storesList.appendChild(storeCard);
+                const card = document.createElement('div');
+                card.className = 'store-card';
+                card.innerHTML = `<div class="store-name">${store.name}</div><div class="store-type">${store.type}</div><div class="store-hours">Hours: ${store.hours}</div>${store.rating ? `<div class="store-rating">⭐ Rating: ${store.rating}/5</div>` : ''}${store.location ? `<div class="store-location">📍 Location: ${store.location}</div>` : ''}`;
+                list.appendChild(card);
             });
         }
         function renderStudents() {
@@ -1230,42 +922,31 @@
             tbody.innerHTML = '';
             studentsData.forEach(student => {
                 const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${student.name}</td>
-                    <td>${student.roll}</td>
-                    <td>${student.department || 'N/A'}</td>
-                `;
+                row.innerHTML = `<td>${student.name}</td><td>${student.roll}</td><td>${student.department || 'N/A'}</td>`;
                 tbody.appendChild(row);
             });
         }
         function checkOnline() {
-            if (navigator.onLine) {
-                showPage('index');
-            } else {
-                alert('Still offline. Please check your connection.');
-            }
+            if (navigator.onLine) showPage('index');
+            else alert('Still offline. Please check your connection.');
         }
         document.addEventListener('DOMContentLoaded', () => {
             loadTheme();
             updateOnlineStatus();
             const modals = document.querySelectorAll('.modal');
-            const closeButtons = document.querySelectorAll('.close');
-            closeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    modals.forEach(modal => {
-                        modal.style.display = 'none';
-                    });
-                });
-            });
-            window.addEventListener('click', (e) => {
-                modals.forEach(modal => {
-                    if (e.target === modal) {
-                        modal.style.display = 'none';
-                    }
-                });
-            });
+            const closeBtns = document.querySelectorAll('.close');
+            closeBtns.forEach(btn => btn.addEventListener('click', () => modals.forEach(m => m.style.display = 'none')));
+            window.addEventListener('click', e => modals.forEach(m => { if (e.target === m) m.style.display = 'none'; }));
             showPage('index');
         });
+        // Register SW
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered:', reg))
+                    .catch(err => console.error('SW registration failed:', err));
+            });
+        }
     </script>
 </body>
 </html>
