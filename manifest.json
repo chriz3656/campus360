@@ -2,7 +2,7 @@
   "name": "Campus360 - All-in-One College Companion",
   "short_name": "Campus360",
   "description": "Your centralized platform for timetables, events, canteen, map, stores, and student information.",
-  "start_url": "/index.html",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
