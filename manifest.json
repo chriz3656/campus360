@@ -6,7 +6,8 @@
   "scope": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
-  "theme_color": "#0b6efd",
+  "theme_color": "#4a6fa5", // Updated to match new file's primary color
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "icon/icon-72x72.png",
@@ -56,5 +57,11 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ]
+  ],
+  "categories": [
+    "education",
+    "utilities"
+  ],
+  "lang": "en",
+  "dir": "ltr"
 }
